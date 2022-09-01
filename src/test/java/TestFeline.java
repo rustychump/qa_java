@@ -1,20 +1,33 @@
 import com.example.Feline;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TestFeline {
-    @Test
-    public void checkFeline() throws Exception {
+
+    public Feline createFelineSpy() {
         Feline feline = new Feline();
-        Feline felineSpy = Mockito.spy(feline);
-        Mockito.when(felineSpy.getFood("Хищник")).thenReturn(new ArrayList<>());
-        Assert.assertEquals(new ArrayList<>(), felineSpy.eatMeat());
-        Assert.assertEquals("Кошачьи", felineSpy.getFamily());
-        Assert.assertEquals(1, felineSpy.getKittens());
-        Assert.assertEquals(2, felineSpy.getKittens(2));
+        return Mockito.spy(feline);
+    }
+
+    @Test
+    public void checkFelineEatMeat() throws Exception {
+        Feline testFeline = createFelineSpy();
+        Mockito.when(testFeline.getFood("Хищник")).thenReturn(new ArrayList<>());
+        Assert.assertEquals(new ArrayList<>(), testFeline.eatMeat());
+    }
+
+    @Test
+    public void checkFelineGetKittens() {
+        Assert.assertEquals(1, createFelineSpy().getKittens());
+        Assert.assertEquals(2, createFelineSpy().getKittens(2));
+    }
+
+    @Test
+    public void checkFelineGetFamily() {
+        Assert.assertEquals("Кошачьи", createFelineSpy().getFamily());
     }
 }

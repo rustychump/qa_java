@@ -12,14 +12,21 @@ import java.util.ArrayList;
 @RunWith(MockitoJUnitRunner.class)
 public class TestCat {
 
+    public Cat createCat() {
+        return new Cat(feline);
+    }
+
     @Mock
     Feline feline;
 
     @Test
-    public void checkCat() throws Exception {
-        Cat cat = new Cat(feline);
-        Assert.assertEquals("Мяу", cat.getSound());
+    public void checkCatGetSound() {
+        Assert.assertEquals("Мяу", createCat().getSound());
+    }
+
+    @Test
+    public void checkCatGetFood() throws Exception {
         Mockito.when(feline.eatMeat()).thenReturn(new ArrayList<>());
-        Assert.assertEquals(new ArrayList<>(), cat.getFood());
+        Assert.assertEquals(new ArrayList<>(), createCat().getFood());
     }
 }

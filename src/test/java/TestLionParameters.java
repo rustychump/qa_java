@@ -17,39 +17,32 @@ public class TestLionParameters {
         this.sex = sex;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "{index}Test data: {0}")
     public static Object[][] getSex() {
         return new Object[][] {
                 {"Самец"},
                 {"Самка"},
-                {"Не определился"},
+                {"Не определился"}
         };
     }
 
     @Test
-    public void checkLion() throws Exception {
+    public void checkLionDoesHaveMane() {
         Kittens kittens = new Feline();
         Food food = new Animal();
         Lion lion;
         try {
-            lion = new Lion(sex, kittens, food);
+            lion = new Lion(sex);
         } catch (Exception exception) {
             System.out.println("Да он квир");
             return;
         }
 
-        Assert.assertEquals(1, lion.getKittens());
+
         if (sex.equals("Самец")) {
             Assert.assertTrue(lion.doesHaveMane());
         } else if (sex.equals("Самка")) {
             Assert.assertFalse(lion.doesHaveMane());
         }
-
-        List<String> foodList = new ArrayList<>();
-        foodList.add("Животные");
-        foodList.add("Птицы");
-        foodList.add("Рыба");
-        Assert.assertEquals(foodList, lion.getFood());
-
     }
 }

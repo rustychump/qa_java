@@ -8,7 +8,7 @@ public class Lion{
     private Kittens kittens;
     private Food food;
 
-    public Lion(String sex, Kittens kittens, Food food) throws Exception {
+    public Lion(String sex) throws Exception {
         if ("Самец".equals(sex)) {
             hasMane = true;
         } else if ("Самка".equals(sex)) {
@@ -16,6 +16,9 @@ public class Lion{
         } else {
             throw new Exception("Используйте допустимые значения пола животного - самец или самка");
         }
+    }
+
+    public Lion(Kittens kittens, Food food) {
         this.kittens = kittens;
         this.food = food;
     }
